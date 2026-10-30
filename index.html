@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CyberPath">
+<meta name="theme-color" content="#f5f6f8">
+<title>CyberPath</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--ink:#101828;--mut:#7a8496;--ac:#1d4ed8;--line:#e3e7ee;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b23;--ink:#eef1f6;--mut:#8b95a7;--ac:#7aa2ff;--line:#262c38;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,sans-serif;padding:env(safe-area-inset-top,0) 0 calc(84px + env(safe-area-inset-bottom,0))}
+main{max-width:560px;margin:0 auto;padding:22px 20px}
+h1{font:600 36px/1.12 ui-serif,Georgia,serif;letter-spacing:-.6px;margin:6px 0 8px}
+h2{font:600 22px ui-serif,Georgia,serif;margin:34px 0 4px}
+.mut{color:var(--mut);font-size:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.ring{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--ac) calc(var(--p)*1%),var(--line) 0)}
+.ring:after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--bg)}
+.ring b{position:relative;z-index:1;font:600 19px ui-serif,Georgia,serif}
+.ses{display:flex;align-items:center;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
+.ses:last-of-type{border-bottom:1px solid var(--line)}
+.ses .t{flex:1}.ses .t b{display:block;font-weight:600}
+.ck{flex:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:none;color:#fff;font-size:16px;padding:0}
+.ck.on{background:var(--ac);border-color:var(--ac)}
+.pl{border:0;background:none;color:var(--ac);font:600 14px system-ui;padding:8px}
+.tm{position:sticky;top:8px;background:var(--ink);color:var(--bg);border-radius:14px;padding:12px 16px;margin:12px 0;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.tm button{border:0;background:none;color:inherit;font:inherit;text-decoration:underline}
+.tm.h{display:none}
+.q{margin-top:30px}.q p{font:600 19px/1.4 ui-serif,Georgia,serif;margin:6px 0 10px}
+.o{display:block;width:100%;text-align:left;padding:13px 15px;margin-top:8px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.o.ok{border-color:#1f9d6b;background:color-mix(in srgb,#1f9d6b 16%,var(--card))}
+.o.no{border-color:#d9455a;background:color-mix(in srgb,#d9455a 14%,var(--card))}
+textarea{width:100%;min-height:96px;margin-top:8px;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.nv{display:flex;justify-content:space-between;margin-top:26px}
+.nv button,.bt{border:0;background:none;color:var(--ac);font:600 15px system-ui;padding:10px 0}
+.bt{display:block;padding:14px 0;border-top:1px solid var(--line);width:100%;text-align:left}
+.off{margin:40px 0;font:italic 400 22px/1.5 ui-serif,Georgia,serif;color:var(--mut)}
+.wk{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line)}
+.wk span{flex:1;font-size:15px}.wk em{font-style:normal;color:var(--mut);font-size:13px;width:22px}
+.sq{display:flex;gap:4px}
+.sq button{width:17px;height:17px;border-radius:5px;border:0;padding:0;background:var(--line)}
+.sq .l1{background:color-mix(in srgb,var(--ac) 35%,var(--line))}.sq .l2{background:color-mix(in srgb,var(--ac) 65%,var(--line))}.sq .l3{background:var(--ac)}
+.sq .o0{background:none;border:1.5px dashed var(--line)}.sq .now{outline:2px solid var(--ink);outline-offset:1px}
+.res{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.res a{color:var(--ink);font-size:14px;padding:6px 12px;border-radius:99px;border:1px solid var(--line);text-decoration:none}
+.num{font:600 54px/1 ui-serif,Georgia,serif}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+input[type=date]{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:6px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom,0))}
+nav button{flex:1;max-width:160px;border:0;background:none;color:var(--mut);font:600 14px system-ui;padding:11px 0;border-radius:12px}
+nav .on{color:var(--ink);background:var(--card)}
+</style></head><body>
+<main id="v"></main>
+<nav><button data-t=t onclick="tab='t';R()">Сегодня</button><button data-t=p onclick="tab='p';R()">Путь</button><button data-t=s onclick="tab='s';R()">Итоги</button></nav>
+<script>
+const ST=['Фундамент','Ядро безопасности','Пентест'];
+const RS=[[['CS50','https://cs50.harvard.edu/x'],['Linux Journey','https://linuxjourney.com'],['OverTheWire','https://overthewire.org/wargames/bandit/'],['Professor Messer','https://www.professormesser.com']],
+[['TryHackMe','https://tryhackme.com'],['OWASP Top 10','https://owasp.org/Top10/'],['PortSwigger','https://portswigger.net/web-security'],['CyberChef','https://gchq.github.io/CyberChef/']],
+[['Hack The Box','https://www.hackthebox.com'],['picoCTF','https://picoctf.org'],['MITRE ATT&CK','https://attack.mitre.org'],['Ghidra','https://ghidra-sre.org']]];
+const W=[
+['Компьютер изнутри',['Железо и UEFI','Двоичная и hex','ОС: процессы и память'],'Установи VirtualBox и Ubuntu'],
+['Linux: старт',['Терминал и файлы','Права и пользователи','Пакеты и man'],'OverTheWire Bandit 0–5'],
+['Linux глубже',['Процессы и сервисы','grep, pipes, sed, awk','Логи и cron'],'Bandit 6–12'],
+['Windows',['Реестр и службы','PowerShell','Пользователи, UAC, Defender'],'Windows VM и журнал событий'],
+['Сети I',['Модели OSI и TCP/IP','IP, маски, подсети','MAC, ARP, DHCP'],'10 подсетей вручную'],
+['Сети II',['DNS','HTTP и HTTPS','TCP, UDP, ICMP'],'Packet Tracer: домашняя сеть'],
+['Wireshark',['Интерфейс и фильтры','Разбор HTTP и DNS','Порты и сервисы'],'Захвати и опиши свой трафик'],
+['Сетевая защита',['Firewall и NAT','VPN и прокси','Wi-Fi и WPA3'],'Nmap по своей VM'],
+['Bash',['Переменные и условия','Циклы и функции','Cron и автоматизация'],'Скрипт бэкапа'],
+['Python I',['Типы и строки','Условия и циклы','Функции и словари'],'Генератор паролей'],
+['Python II',['Файлы и regex','Сокеты','requests и API'],'Сканер портов'],
+['Git и GitHub',['Commit и ветки','GitHub и README','GitHub Pages'],'Выложи проекты на GitHub'],
+['Основы ИБ',['Триада CIA','Угрозы и риски','Модели угроз'],'Разбор 3 реальных взломов'],
+['Социальная инженерия',['Фишинг','Pretexting','Основы OSINT'],'Разбери 5 фишинговых писем'],
+['Криптография I',['Симметричное и асимметричное','Хеши','Пароли и соль'],'CyberChef: 5 задач'],
+['Криптография II',['TLS и сертификаты','PKI','Цифровые подписи'],'HTTPS на локальном сервере'],
+['Аутентификация',['MFA','RBAC','Kerberos и SSO'],'Усиль безопасность ноутбука'],
+['Веб I',['Клиент и сервер','HTML, JS, cookie','SQL'],'Мини-сайт на Flask'],
+['Веб II',['OWASP Top 10','SQL-инъекции','XSS'],'PortSwigger: SQLi'],
+['Веб III',['IDOR и CSRF','SSRF','Burp Suite'],'PortSwigger: 5 лаб'],
+['Kali и разведка',['Kali Linux','Nmap глубже','Gobuster и nikto'],'TryHackMe: Pre Security'],
+['Эксплуатация I',['CVE и Exploit-DB','Metasploit','Reverse shell'],'Взлом Metasploitable'],
+['Эксплуатация II',['PrivEsc Linux','PrivEsc Windows','Пост-эксплуатация'],'TryHackMe: Linux PrivEsc'],
+['Чекпоинт',['Повтор: сети','Повтор: веб','Повтор: Linux'],'Первый writeup'],
+['Active Directory I',['Домен и LDAP','Kerberos и NTLM','GPO'],'AD-лаба дома'],
+['Active Directory II',['Enumeration','Password spraying','Kerberoasting'],'TryHackMe: AD'],
+['Windows в защите',['Логи событий','Sysmon','Defender и AMSI'],'Sysmon и разбор атаки'],
+['Сети в атаке',['MITM','Pivoting','Туннели'],'Pivot через 2 VM'],
+['Веб глубже',['Обход аутентификации','Десериализация','Безопасность API'],'PortSwigger: API'],
+['Облако и контейнеры',['Docker','Основы AWS','Мисконфигурации'],'Уязвимый Docker-контейнер'],
+['Blue team',['SIEM','MITRE ATT&CK','Реагирование на инциденты'],'Разбери атаку по логам'],
+['Reverse и malware',['Основы ассемблера','Ghidra','Песочницы'],'Разбор простого crackme'],
+['CTF',['Форматы и тактика','Forensics','Crypto и pwn: старт'],'Участие в picoCTF'],
+['Hack The Box',['Методика','Машины Easy','Отчёты'],'3 машины Easy'],
+['Сертификации',['Security+','eJPT и PNPT','План подготовки'],'Пробный экзамен'],
+['Портфолио',['GitHub-профиль','Три writeup','План на следующий год'],'Опубликуй портфолио']];
+const Q=[
+{q:'Что означает триада CIA?',o:['Конфиденциальность, целостность, доступность','Контроль, идентификация, аудит','Центральное разведуправление'],c:0},
+{q:'Какая команда Linux показывает текущую папку?',o:['ls','pwd','cd'],c:1},
+{q:'Порт HTTPS по умолчанию?',o:['80','22','443'],c:2},
+{q:'Что делает DNS?',o:['Шифрует трафик','Переводит имена в IP','Выдаёт IP-адреса'],c:1},
+{q:'Что означает chmod 755?',o:['rwxr-xr-x','rw-r--r--','rwxrwxrwx'],c:0},
+{q:'Сколько бит в адресе IPv4?',o:['64','128','32'],c:2},
+{q:'Чем хеш отличается от шифрования?',o:['Хеш нельзя обратить','Хеш использует ключ','Ничем'],c:0},
+{q:'Что такое SQL-инъекция?',o:['Перегрузка сервера','Внедрение SQL через ввод','Кража cookie'],c:1},
+{q:'Какой инструмент сканирует порты?',o:['Nmap','Git','CyberChef'],c:0},
+{q:'На каком уровне OSI работает HTTP?',o:['Сетевом','Транспортном','Прикладном'],c:2}];
+const NW=W.length,N=NW*7,DU=[[90,90,30],[30,150,30],[30,150,30]],PM=[0,1,0,1,0,2];
+const SB=['Теория','Практика','Теория','Практика','Тема целиком','Лаба недели','Выходной'];
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+let S={};try{S=JSON.parse(localStorage.getItem('cp2'))||{}}catch(e){}
+S.start=S.start||iso(new Date());S.done=S.done||{};S.notes=S.notes||{};S.qa=S.qa||{};
+const save=()=>{try{localStorage.setItem('cp2',JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const todayN=()=>Math.max(0,Math.min(N-1,Math.round((new Date(new Date().toDateString())-new Date(S.start+'T00:00:00'))/864e5)));
+const off=d=>d%7==6,cnt=d=>off(d)?3:(S.done[d]||[]).filter(Boolean).length,full=d=>cnt(d)==3;
+const head=d=>{const i=d%7,k=W[d/7|0];return i==6?'Выходной':i==5?k[2]:k[1][[0,0,1,1,2][i]]};
+const names=d=>d%7==5?['Подготовка','Лаба','Конспект']:['Теория','Практика','Повтор и вопрос'];
+let cur=todayN(),tab='t',TM={on:0,s:0,n:'',id:0};
+const fm=s=>String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function tg(d,j){const x=S.done[d]||[0,0,0];x[j]=x[j]?0:1;S.done[d]=x;save();vt()}
+function go(n){cur=Math.max(0,Math.min(N-1,cur+n));R()}
+function nt(d,v){S.notes[d]=v;save()}
+function ans(d,i){if(S.qa[d]!=null)return;S.qa[d]=i;save();vt()}
+function play(d,j){clearInterval(TM.id);const m=DU[PM[d%7]][j];TM={on:1,s:m*60,n:names(d)[j],id:setInterval(()=>{TM.s--;const e=$('#tm span');if(e)e.textContent=TM.n+'  '+fm(TM.s);if(TM.s<=0){clearInterval(TM.id);TM.on=0;if(navigator.vibrate)navigator.vibrate(300);vt()}},1000)};vt()}
+function stop(){clearInterval(TM.id);TM.on=0;vt()}
+function vt(){const d=cur,w=d/7|0,i=d%7,k=W[w],c=cnt(d),q=Q[d%Q.length],a=S.qa[d],x=S.done[d]||[0,0,0],st=w/12|0;let b;
+if(i==6)b=`<div class=off>Сегодня выходной.<br>Мозг закрепляет выученное, пока ты отдыхаешь.</div>`;
+else b=`<div id=tm class="tm ${TM.on?'':'h'}"><span>${TM.n}  ${fm(TM.s)}</span><button onclick="stop()">стоп</button></div>`+names(d).map((n,j)=>`<div class=ses><button class="ck ${x[j]?'on':''}" onclick="tg(${d},${j})">${x[j]?'✓':''}</button><div class=t><b>${n}</b><span class=mut>${DU[PM[i]][j]} минут</span></div><button class=pl onclick="play(${d},${j})">Старт</button></div>`).join('')+
+`<div class=q><div class=mut>Вопрос дня</div><p>${q.q}</p>${q.o.map((o,n)=>`<button class="o ${a==null?'':n==q.c?'ok':n==a?'no':''}" onclick="ans(${d},${n})">${o}</button>`).join('')}</div>
+<div class=q><div class=mut>Заметка</div><textarea oninput="nt(${d},this.value)" placeholder="Что понял сегодня?">${esc(S.notes[d])}</textarea></div>`;
+$('#v').innerHTML=`<div class=top><div><div class=mut>День ${d+1} из ${N}<br>Этап ${st+1}: ${ST[st]}, неделя ${w+1}</div><h1>${head(d)}</h1><div class=mut>${SB[i]}${i<5?', '+k[0]:''}</div></div><div class=ring style="--p:${i==6?100:c/3*100}"><b>${i==6?'—':c+'/3'}</b></div></div>${b}
+<div class=nv><button onclick="go(-1)">Назад</button><button onclick="cur=todayN();R()">Сегодня</button><button onclick="go(1)">Дальше</button></div>`}
+function vp(){let h='<h1>Путь на 9 месяцев</h1><div class=mut>36 недель: 6 учебных дней и 1 выходной. Нажми на квадрат, чтобы открыть день.</div>';
+ST.forEach((s,m)=>{h+=`<h2>Этап ${m+1}: ${s}</h2><div class=res>${RS[m].map(r=>`<a href="${r[1]}" target=_blank rel=noopener>${r[0]}</a>`).join('')}</div>`;
+for(let w=m*12;w<m*12+12;w++)h+=`<div class=wk><em>${w+1}</em><span>${W[w][0]}</span><div class=sq>${[0,1,2,3,4,5,6].map(i=>{const d=w*7+i,c=cnt(d);return `<button class="${i==6?'o0':'l'+c} ${d==todayN()?'now':''}" onclick="cur=${d};tab='t';R()"></button>`}).join('')}</div></div>`});
+$('#v').innerHTML=h}
+function vs(){let dn=0,min=0,s=0,d=todayN();for(let i=0;i<N;i++){if(i%7<6&&full(i))dn++;(S.done[i]||[]).forEach((v,j)=>{if(v)min+=DU[PM[i%7]][j]})}
+if(!full(d))d--;while(d>=0&&full(d)){s++;d--}
+$('#v').innerHTML=`<h1>Итоги</h1><div class=g><div><div class=num>${dn}</div><div class=mut>дней выполнено</div></div><div><div class=num>${Math.round(min/60)}</div><div class=mut>часов учёбы</div></div><div><div class=num>${s}</div><div class=mut>дней подряд</div></div></div>
+<div class=mut>Дата старта</div><input type=date value="${S.start}" onchange="S.start=this.value;save();cur=todayN();R()">
+<div style="margin-top:22px"><button class=bt onclick="navigator.clipboard.writeText(JSON.stringify(S)).then(()=>alert('Копия прогресса скопирована'))">Скопировать прогресс</button><button class=bt onclick="const t=prompt('Вставь скопированный прогресс');if(t){try{S=JSON.parse(t);save();R()}catch(e){alert('Не получилось прочитать')}}">Восстановить прогресс</button><button class=bt style="color:#d9455a" onclick="if(confirm('Стереть весь прогресс?')){localStorage.removeItem('cp2');location.reload()}">Сбросить всё</button></div>`}
+function R(){({t:vt,p:vp,s:vs})[tab]();document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==tab));scrollTo(0,0)}
+R();
+</script></body></html>
